@@ -36,7 +36,7 @@ app.post('/upload', upload.fields([{ name: 'image' }, { name: 'audio' }]), async
   try {
     const imageResult = await cloudinary.uploader.upload(req.files['image'][0].path);
     const audioResult = await cloudinary.uploader.upload(req.files['audio'][0].path, {
-      resource_type: 'video' // Specify the resource type as 'video' for audio files
+      resource_type: 'video' 
     });
 
     const imageUrl = imageResult.secure_url;
