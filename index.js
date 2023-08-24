@@ -8,7 +8,6 @@ const axios = require('axios');
 const app = express();
 const PORT = 8000;
 
-
 app.use(cors());
 
 cloudinary.config({ 
@@ -32,6 +31,11 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// GET API to welcome users to the home route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the home route!' });
+});
+
 app.post('/upload', upload.fields([{ name: 'image' }, { name: 'audio' }]), async (req, res) => {
   try {
     const imageResult = await cloudinary.uploader.upload(req.files['image'][0].path);
@@ -41,8 +45,6 @@ app.post('/upload', upload.fields([{ name: 'image' }, { name: 'audio' }]), async
 
     const imageUrl = imageResult.secure_url;
     const audioUrl = audioResult.secure_url;
-    
-
 
     res.json({ message: 'Files uploaded successfully', imageUrl, audioUrl });
   } catch (error) {
