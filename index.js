@@ -33,7 +33,7 @@ app.use(express.json());
 
 // GET API to welcome users to the home route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the home route!' });
+  res.json('Welcome to the home route!');
 });
 
 app.post('/upload', upload.fields([{ name: 'image' }, { name: 'audio' }]), async (req, res) => {
